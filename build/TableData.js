@@ -13,6 +13,7 @@ class TableData extends HTMLElement {
         if (Boolean(this.data)) {
             this.makeContentFromData(this.data);
         }
+        this.makeStyles();
     }
     makeContentFromData(data) {
         let type = typeof data;
@@ -25,6 +26,14 @@ class TableData extends HTMLElement {
     }
     clearContent() {
         this.innerHTML = "";
+    }
+    appendContent(val) {
+        this.clearContent();
+        this.appendChild(val);
+    }
+    makeStyles() {
+        this.style.padding = "1rem";
+        this.style.border = "1px solid black";
     }
 }
 customElements.define("table-data", TableData);
