@@ -1,5 +1,5 @@
 "use strict";
-class Row extends HTMLElement {
+class ToolRow extends HTMLElement {
     constructor(list) {
         super();
         this.tableDataList = [new ToolData(undefined)];
@@ -33,7 +33,14 @@ class Row extends HTMLElement {
         this.style.flexDirection = "row";
         this.style.flexWrap = "nowrap";
         this.style.justifyContent = "center";
+        this.onmouseover = () => {
+            this.style.backgroundColor = "var(--color-dark)";
+        };
+        this.onmouseleave = () => {
+            this.style.backgroundColor = "transparent";
+        };
+        this.draggable = true;
     }
 }
-customElements.define("tool-row", Row);
+customElements.define("tool-row", ToolRow);
 //# sourceMappingURL=ToolRow.js.map

@@ -1,5 +1,5 @@
 "use strict";
-class TableData extends HTMLElement {
+class ToolData extends HTMLElement {
     constructor(input) {
         super();
         if (typeof input === "string" || typeof input === "number") {
@@ -32,9 +32,10 @@ class TableData extends HTMLElement {
         this.appendChild(val);
     }
     makeStyles() {
-        this.style.padding = "1rem";
+        this.style.margin = "5px";
+        this.style.padding = "0.5rem";
         this.style.border = "1px solid black";
     }
 }
-customElements.define("table-data", TableData);
+customElements.define("tool-data", ToolData);
 //# sourceMappingURL=ToolData.js.map

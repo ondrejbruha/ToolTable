@@ -1,8 +1,8 @@
-class Row extends HTMLElement{
-    private tableDataList: TableData[] = [new TableData(undefined)];
-    constructor(list: TableData[]) {
+class ToolRow extends HTMLElement{
+    private tableDataList: ToolData[] = [new ToolData(undefined)];
+    constructor(list: ToolData[]) {
         super();
-        this.tableDataList = list ? list : [new TableData(undefined)];
+        this.tableDataList = list ? list : [new ToolData(undefined)];
     }
     connectedCallback(){
         if(Array.isArray(this.tableDataList)){
@@ -15,10 +15,10 @@ class Row extends HTMLElement{
         }
         this.makeStyles();
     }
-    get data(): TableData[]{
+    get data(): ToolData[]{
         return this.tableDataList;
     }
-    set data(val: TableData[]) {
+    set data(val: ToolData[]) {
         this.tableDataList = val;
     }
     getColumnsCount(): number{
@@ -32,6 +32,13 @@ class Row extends HTMLElement{
         this.style.flexDirection = "row";
         this.style.flexWrap = "nowrap";
         this.style.justifyContent = "center";
+        this.onmouseover = ()=>{
+            this.style.backgroundColor = "var(--color-dark)";
+        }
+        this.onmouseleave = ()=>{
+            this.style.backgroundColor = "transparent";
+        }
+        this.draggable = true;
     }
 }
-customElements.define("tool-row", Row);
+customElements.define("tool-row", ToolRow);

@@ -1,4 +1,4 @@
-class TableData extends HTMLElement{
+class ToolData extends HTMLElement{
     private data: any;
     constructor(input: any) {
         super();
@@ -34,8 +34,9 @@ class TableData extends HTMLElement{
         this.appendChild(val);
     }
     makeStyles():void {
-        this.style.padding = "1rem";
+        this.style.margin = "5px";
+        this.style.padding = "0.5rem";
         this.style.border = "1px solid black";
     }
 }
-customElements.define("table-data", TableData);
+customElements.define("tool-data", ToolData);
