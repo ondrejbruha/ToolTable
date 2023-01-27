@@ -1,14 +1,15 @@
 class ToolTable extends HTMLElement{
     private rows: ToolRow[] = [new ToolRow([new ToolData(undefined)])];
+    dragAndDrop: DragAndDrop;
     constructor(rowsInput: ToolRow[] | undefined) {
         super();
         if(rowsInput){
             this.rows = rowsInput;
         }
+        this.dragAndDrop = new DragAndDrop();
     }
     connectedCallback(): void{
         this.updateToolTable();
-        this.makeDragDrop();
     }
     updateToolTable(): void {
         this.innerHTML = "";
@@ -31,26 +32,6 @@ class ToolTable extends HTMLElement{
         this.style.flexDirection = "column";
         this.style.justifyContent = "center";
         this.style.flexWrap = "nowrap";
-    }
-    makeDragDrop():void{
-        let target: Element | null;
-        for(let r of this.rows){
-            r.ondragstart = (e) => {
-                target = e.target instanceof Element ? e.target : null;
-                if(target){
-
-                }
-            }
-            r.ondragenter = (e)=>{
-                e.preventDefault();
-                let elem: Element | null = e.target && e.target instanceof Element && e.target instanceof ToolRow ? e.target.parentElement : null;
-                console.log(elem);
-                if(target && elem){
-                    target.after(elem);
-                }
-
-            }
-        }
     }
 }
 customElements.define("tool-table",ToolTable);

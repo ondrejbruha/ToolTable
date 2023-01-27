@@ -6,10 +6,10 @@ class ToolTable extends HTMLElement {
         if (rowsInput) {
             this.rows = rowsInput;
         }
+        this.dragAndDrop = new DragAndDrop();
     }
     connectedCallback() {
         this.updateToolTable();
-        this.makeDragDrop();
     }
     updateToolTable() {
         this.innerHTML = "";
@@ -32,24 +32,6 @@ class ToolTable extends HTMLElement {
         this.style.flexDirection = "column";
         this.style.justifyContent = "center";
         this.style.flexWrap = "nowrap";
-    }
-    makeDragDrop() {
-        let target;
-        for (let r of this.rows) {
-            r.ondragstart = (e) => {
-                target = e.target instanceof Element ? e.target : null;
-                if (target) {
-                }
-            };
-            r.ondragenter = (e) => {
-                e.preventDefault();
-                let elem = e.target && e.target instanceof Element && e.target instanceof ToolRow ? e.target.parentElement : null;
-                console.log(elem);
-                if (target && elem) {
-                    target.after(elem);
-                }
-            };
-        }
     }
 }
 customElements.define("tool-table", ToolTable);

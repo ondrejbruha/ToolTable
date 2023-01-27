@@ -15,6 +15,7 @@ class ToolRow extends HTMLElement {
             throw new Error("table data is not an array");
         }
         this.makeStyles();
+        this.makeDragDrop();
     }
     get data() {
         return this.tableDataList;
@@ -40,6 +41,22 @@ class ToolRow extends HTMLElement {
             this.style.backgroundColor = "transparent";
         };
         this.draggable = true;
+    }
+    makeDragDrop() {
+        this.ondragstart = (e) => {
+            if (e.target && e.target instanceof ToolRow) {
+                DragAndDrop.setRow(e.target);
+            }
+        };
+        this.ondragover = (e) => {
+            var _a;
+            console.log(e.target);
+            let target = e.target && e.target instanceof ToolRow ? e.target : undefined;
+            let row = DragAndDrop.getRow() ? DragAndDrop.getRow() : undefined;
+            if (target && row) {
+                ((_a = this.parentElement) === null || _a === void 0 ? void 0 : _a.firstChild) === target ? target.insertAdjacentElement("beforebegin", row) : target.insertAdjacentElement("afterend", row);
+            }
+        };
     }
 }
 customElements.define("tool-row", ToolRow);
