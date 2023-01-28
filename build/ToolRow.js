@@ -50,7 +50,6 @@ class ToolRow extends HTMLElement {
         };
         this.ondragover = (e) => {
             var _a;
-            console.log(e.target);
             let target = e.target && e.target instanceof ToolRow ? e.target : undefined;
             let row = DragAndDrop.getRow() ? DragAndDrop.getRow() : undefined;
             if (target && row) {
