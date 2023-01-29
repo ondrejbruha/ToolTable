@@ -3,6 +3,7 @@ class ToolRow extends HTMLElement {
     constructor(list) {
         super();
         this.tableDataList = [new ToolData(undefined)];
+        this.dataCount = 0;
         this.tableDataList = list ? list : [new ToolData(undefined)];
     }
     connectedCallback() {
@@ -16,9 +17,19 @@ class ToolRow extends HTMLElement {
         }
         this.makeStyles();
         this.makeDragDrop();
+        this.updateCount();
     }
     get data() {
         return this.tableDataList;
+    }
+    updateCount() {
+        this.dataCount = 0;
+        for (let t of this.tableDataList) {
+            this.dataCount++;
+        }
+    }
+    getCount() {
+        return this.dataCount;
     }
     set data(val) {
         this.tableDataList = val;

@@ -1,5 +1,6 @@
 class ToolRow extends HTMLElement {
     private tableDataList: ToolData[] = [new ToolData(undefined)];
+    private dataCount: number = 0;
     constructor(list: ToolData[]) {
         super();
         this.tableDataList = list ? list : [new ToolData(undefined)];
@@ -15,9 +16,19 @@ class ToolRow extends HTMLElement {
         }
         this.makeStyles();
         this.makeDragDrop();
+        this.updateCount();
     }
     get data(): ToolData[] {
         return this.tableDataList;
+    }
+    updateCount(): void{
+        this.dataCount = 0;
+        for(let t of this.tableDataList){
+            this.dataCount++;
+        }
+    }
+    getCount():number{
+        return this.dataCount;
     }
     set data(val: ToolData[]) {
         this.tableDataList = val;

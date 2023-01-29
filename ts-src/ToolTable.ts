@@ -1,6 +1,8 @@
 class ToolTable extends HTMLElement {
     private rows: ToolRow[] = [new ToolRow([new ToolData(undefined)])];
     dragAndDrop: DragAndDrop;
+    private maxRowCount: number = 0;
+    private maxColumnCount: number = 0;
     constructor(rowsInput: ToolRow[] | undefined) {
         super();
         if (rowsInput) {
@@ -23,6 +25,19 @@ class ToolTable extends HTMLElement {
     }
     getRows(): ToolRow[] {
         return this.rows;
+    }
+    updateCounts():void{
+        this.maxColumnCount = this.rows ? this.rows.length : 0;
+        this.maxRowCount = 0;
+        for(let r of this.rows){
+            this.maxRowCount = Math.max(this.maxRowCount, r ? r.getCount() : 0);
+        }
+    }
+    getRowCount(): number{
+        return this.maxRowCount;
+    }
+    getColumnCount(): number{
+        return this.maxColumnCount;
     }
     setRows(input: ToolRow[]): void {
         this.rows = input;

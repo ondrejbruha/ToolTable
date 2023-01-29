@@ -3,6 +3,8 @@ class ToolTable extends HTMLElement {
     constructor(rowsInput) {
         super();
         this.rows = [new ToolRow([new ToolData(undefined)])];
+        this.maxRowCount = 0;
+        this.maxColumnCount = 0;
         if (rowsInput) {
             this.rows = rowsInput;
         }
@@ -23,6 +25,19 @@ class ToolTable extends HTMLElement {
     }
     getRows() {
         return this.rows;
+    }
+    updateCounts() {
+        this.maxColumnCount = this.rows ? this.rows.length : 0;
+        this.maxRowCount = 0;
+        for (let r of this.rows) {
+            this.maxRowCount = Math.max(this.maxRowCount, r ? r.getCount() : 0);
+        }
+    }
+    getRowCount() {
+        return this.maxRowCount;
+    }
+    getColumnCount() {
+        return this.maxColumnCount;
     }
     setRows(input) {
         this.rows = input;
